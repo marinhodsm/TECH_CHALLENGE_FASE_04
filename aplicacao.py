@@ -20,15 +20,32 @@ st.set_page_config(
     layout='wide'
 )
 
-# st.title('🏥 Painel de Apoio à Prevenção e Diagnóstico de Obesidade')
-
 col1, col2 = st.columns([1, 8])
 
 with col1:
     st.image("logotipo.png", width=180)
 
 with col2:
-    st.title("Painel de Apoio à Prevenção e Diagnóstico de Obesidade")
+
+    st.markdown(
+        """
+        <div style="
+            height:120px;
+            display:flex;
+            align-items:center;
+        ">
+            <h1 style="
+                font-family: Verdana;
+                margin:0;
+                font-size:30px;
+                color: #1a365d;
+            ">
+            PAINEL DE APOIO À PREVENÇÃO E DIAGNÓSTICO DE OBESIDADE
+            </h1>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 st.markdown('---')
 
@@ -42,11 +59,13 @@ modelo = joblib.load('modelo_obesidade.pkl')
 # ABAS PARA NAVEGAÇÃO DE PÁGINA
 # ==================================================
 
+st.markdown('**NAVEGAÇÃO DE PÁGINAS**')
+
 tab1, tab2, tab3, tab4 = st.tabs([
     '🏠 Visão Geral',
     '⚠️ Fatores de Risco',
     '❤️ Hábitos Preventivos',
-    '🤖 Predição Individual'
+    '🩺 Predição Individual'
 ])
 
 # ==================================================
@@ -61,7 +80,7 @@ with tab1:
         '''
         Este painel foi desenvolvido para apoiar a identificação de fatores
         associados à obesidade e auxiliar ações de prevenção e promoção da saúde.
-
+        
         A solução utiliza técnicas de Ciência de Dados e Machine Learning para
         analisar características comportamentais e corporais relacionadas aos
         diferentes níveis de obesidade.
@@ -129,7 +148,7 @@ with tab1:
 
         st.info(
             '''
-            🤖 **PREDIÇÃO INDIVIDUAL**
+            🩺 **PREDIÇÃO INDIVIDUAL**
 
             Simulação personalizada do nível de obesidade com base
             nas características pessoais informadas pelo usuário.
@@ -467,7 +486,8 @@ with tab4:
         # ==============================================
 
         submit = st.form_submit_button(
-            'Realizar Predição'
+            'Realizar Predição',
+            type='primary'
         )
 
     # ==============================================

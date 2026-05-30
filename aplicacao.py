@@ -15,10 +15,22 @@ import seaborn as sns
 # ==================================================
 
 st.set_page_config(
-    page_title='Painel de Apoio à Prevenção da Obesidade',
-    page_icon='📊',
+    page_title='Painel de Apoio à Prevenção e Diagnóstico de Obesidade',
+    page_icon='icone.png',
     layout='wide'
 )
+
+# st.title('🏥 Painel de Apoio à Prevenção e Diagnóstico de Obesidade')
+
+col1, col2 = st.columns([1, 8])
+
+with col1:
+    st.image("logotipo.png", width=180)
+
+with col2:
+    st.title("Painel de Apoio à Prevenção e Diagnóstico de Obesidade")
+
+st.markdown('---')
 
 # ==================================================
 # CARREGAMENTO DO MODELO TREINADO
@@ -27,28 +39,21 @@ st.set_page_config(
 modelo = joblib.load('modelo_obesidade.pkl')
 
 # ==================================================
-# SIDEBAR
+# ABAS PARA NAVEGAÇÃO DE PÁGINA
 # ==================================================
 
-st.sidebar.title('🏥 Painel de Apoio à Prevenção da Obesidade')
-
-pagina = st.sidebar.radio(
-    'Navegação',
-    [
-        'Visão Geral',
-        'Fatores de Risco',
-        'Hábitos Preventivos',
-        'Predição Individual'
-    ]
-)
+tab1, tab2, tab3, tab4 = st.tabs([
+    '🏠 Visão Geral',
+    '⚠️ Fatores de Risco',
+    '❤️ Hábitos Preventivos',
+    '🤖 Predição Individual'
+])
 
 # ==================================================
 # VISÃO GERAL
 # ==================================================
 
-if pagina == 'Visão Geral':
-
-    st.title('🏥 Painel Inteligente de Apoio à Prevenção da Obesidade')
+with tab1:
 
     st.markdown('---')
 
@@ -161,9 +166,7 @@ if pagina == 'Visão Geral':
 # FATORES DE RISCO
 # ==================================================
 
-elif pagina == 'Fatores de Risco':
-
-    st.title('⚠️ Fatores de Risco')
+with tab2:
 
     st.markdown('---')
 
@@ -259,9 +262,7 @@ elif pagina == 'Fatores de Risco':
 # HÁBITOS PREVENTIVOS
 # ==================================================
 
-elif pagina == 'Hábitos Preventivos':
-
-    st.title('❤️ Hábitos Preventivos')
+with tab3:
 
     st.markdown('---')
 
@@ -329,9 +330,7 @@ elif pagina == 'Hábitos Preventivos':
 # PREDIÇÃO INDIVIDUAL
 # ==================================================
 
-elif pagina == 'Predição Individual':
-
-    st.title('📊 Predição Individual')
+with tab4:
 
     st.markdown('---')
 
@@ -341,7 +340,7 @@ elif pagina == 'Predição Individual':
 
     with st.form('form_obesity'):
 
-        st.subheader('Formulário para Predição Individual')
+        st.subheader('Formulário do Paciente')
 
         # ==============================================
         # DADOS PESSOAIS
@@ -467,12 +466,9 @@ elif pagina == 'Predição Individual':
         # BOTÃO
         # ==============================================
 
-        col1, col2, col3 = st.columns([1, 1, 1])
-
-        with col2:
-            submit = st.form_submit_button(
-                'Realizar Predição'
-            )
+        submit = st.form_submit_button(
+            'Realizar Predição'
+        )
 
     # ==============================================
     # RESULTADO
